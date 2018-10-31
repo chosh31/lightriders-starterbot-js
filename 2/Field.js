@@ -74,27 +74,13 @@
 
         let max = 0;
         let maxKey;
-        let directions = [];
         this.getAvailableMoves(previousMove).map((k) => {
             if (distance[k] >= max) {
                 maxKey = k;
                 max = distance[k];
-                directions.push(k);
             }
             // max = distance[k] > max ? distance[k] : max;
         });
-
-        if (directions.length > 1) {
-            this.checkAvailableMoveNextStep(pos, directions);
-        }
-
-        return maxKey;
-    };
-
-    Field.prototype.checkAvailableMoveNextStep = function (pos, directions) {
-        let currentPos = this.getPosition(botId);
-
-
 
         return maxKey;
     };
