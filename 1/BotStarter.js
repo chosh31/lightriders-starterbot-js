@@ -110,14 +110,16 @@ Bot.prototype.action = function (data) {
         // const moves = this.field.getAvailableMoves(this.previousMove);
         // const move = moves[Math.floor(Math.random() * moves.length)];
 
-        if (this.once && this.field.getDistance(botId, enemyBotId)[startDirection]) {
+        if (this.once) {
             console.error("startDirection : " + startDirection);
-            console.error(this.field.getDistance(botId, enemyBotId)[startDirection]);
-            if (this.field.getDistance(botId, enemyBotId)[startDirection] == 1) {
-                console.error("once : " + this.once);
+            console.error("remain distance : " + this.field.getDistance(botId, enemyBotId)[startDirection]);
+            if (this.field.getDistance(botId, enemyBotId)[startDirection] == 0) {
                 this.once = false;
+                console.error("once : " + this.once);
+
+            } else {
+                return startDirection;
             }
-            return startDirection;
         }
 
         const move = this.field.defineDirection(botId, enemyBotId, this.previousMove);
