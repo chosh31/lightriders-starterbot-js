@@ -94,10 +94,10 @@ Bot.prototype.action = function (data) {
     let botId = this.getBotId();
     let enemyBotId = this.getEnemyBotId();
 
-    console.error('east : ' + this.field.getDistance(botId, enemyBotId).right);
-    console.error('west : ' + this.field.getDistance(botId, enemyBotId).left);
-    console.error('south : ' + this.field.getDistance(botId, enemyBotId).bottom);
-    console.error('north : ' + this.field.getDistance(botId, enemyBotId).top);
+    console.error('right : ' + this.field.getDistance(botId, enemyBotId).right);
+    console.error('left : ' + this.field.getDistance(botId, enemyBotId).left);
+    console.error('down : ' + this.field.getDistance(botId, enemyBotId).down);
+    console.error('up : ' + this.field.getDistance(botId, enemyBotId).up);
 
     // console.error('currentPos X : ' + this.field.getCurrentPosition(botId).x);
     // console.error('currentPos Y : ' + this.field.getCurrentPosition(botId).y);
