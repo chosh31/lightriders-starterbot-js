@@ -31,6 +31,7 @@ let Bot = function () {
     };
     this.field = null;
     this.previousMove = null;
+    this.once = true;
 };
 
 function write(string) {
@@ -93,6 +94,7 @@ Bot.prototype.action = function (data) {
 
     let botId = this.getBotId();
     let enemyBotId = this.getEnemyBotId();
+    let startDirection = botId === 1 ? "right" : "left";
 
     console.error('right : ' + this.field.getDistance(botId, enemyBotId).right);
     console.error('left : ' + this.field.getDistance(botId, enemyBotId).left);
@@ -107,6 +109,16 @@ Bot.prototype.action = function (data) {
     if (data[0] === 'move') {
         // const moves = this.field.getAvailableMoves(this.previousMove);
         // const move = moves[Math.floor(Math.random() * moves.length)];
+
+        if (this.once && this.field.getDistance(botId, enemyBotId)[startDirection]) {
+            console.error("startDirection : " + startDirection);
+            console.error(this.field.getDistance(botId, enemyBotId)[startDirection]);
+            if (this.field.getDistance(botId, enemyBotId)[startDirection] == 1) {
+                console.error("once : " + this.once);
+                this.once = false;
+            }
+            return startDirection;
+        }
 
         const move = this.field.defineDirection(botId, enemyBotId, this.previousMove);
         console.error(move);
