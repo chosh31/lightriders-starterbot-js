@@ -98,64 +98,74 @@
 
     Field.prototype.getDistance = function (botId, enemyBotId) {
         return {
-            right:  this.getEastDistance(botId, enemyBotId),
-            left:  this.getWestDistance(botId, enemyBotId),
-            down: this.getSouthDistance(botId, enemyBotId),
-            up: this.getNorthDistance(botId, enemyBotId)
+            right:  this.getRightDistance(botId, enemyBotId),
+            left:  this.getLeftDistance(botId, enemyBotId),
+            down: this.getDownDistance(botId, enemyBotId),
+            up: this.getUpDistance(botId, enemyBotId)
         }
     };
 
-    Field.prototype.getEastDistance = function (botId, enemyBotId) {
+    Field.prototype.getRightDistance = function (botId, enemyBotId) {
         let currentPos = this.getCurrentPosition(botId);
         let distance = 0
 
         for (let x = currentPos.x; x < this.width - 1; x++) {
             let gridValue = this.grid[x][currentPos.y];
-            if (gridValue !== enemyBotId || gridValue !== 'x') {
-                distance++;
+            
+            if (gridValue === enemyBotId || gridValue === 'x') {
+                break;
             }
+
+            distance++;
         }
 
         return distance
     };
 
-    Field.prototype.getWestDistance = function (botId, enemyBotId) {
+    Field.prototype.getLeftDistance = function (botId, enemyBotId) {
         let currentPos = this.getCurrentPosition(botId);
         let distance = 0
 
         for (let x = currentPos.x; x > 0; x--) {
             let gridValue = this.grid[x][currentPos.y];
-            if (gridValue !== enemyBotId || gridValue !== 'x') {
-                distance++;
+            if (gridValue === enemyBotId || gridValue === 'x') {
+                break;
             }
+
+            distance++;
+
         }
 
         return distance
     };
 
-    Field.prototype.getSouthDistance = function (botId, enemyBotId) {
+    Field.prototype.getDownDistance = function (botId, enemyBotId) {
         let currentPos = this.getCurrentPosition(botId);
         let distance = 0
 
         for (let y = currentPos.y; y < this.height; y++) {
             let gridValue = this.grid[currentPos.x][y];
-            if (gridValue !== enemyBotId || gridValue !== 'x') {
-                distance++;
+            if (gridValue === enemyBotId || gridValue === 'x') {
+                break;
             }
+ 
+            distance++;
         }
 
         return distance
     };
 
-    Field.prototype.getNorthDistance = function (botId, enemyBotId) {
+    Field.prototype.getUpDistance = function (botId, enemyBotId) {
         let currentPos = this.getCurrentPosition(botId);
         let distance = 0
 
         for (let y = currentPos.y; y > 0; y--) {
             let gridValue = this.grid[currentPos.x][y];
-            if (gridValue !== enemyBotId || gridValue !== 'x') {
-                distance++;
+            if (gridValue === enemyBotId || gridValue === 'x') {
+                break;
             }
+
+            distance++;
         }
 
         return distance
