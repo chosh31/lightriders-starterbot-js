@@ -67,6 +67,22 @@
 
         return allMoves.filter(move => move !== getOpposingMove(previousMove));
     };
+
+    Field.prototype.defineDirection = function (botId, enemyBotId, previousMove) {
+        let distance = this.getDistance(botId, enemyBotId);
+
+        let max = 0;
+        let maxKey;
+        this.getAvailableMoves(previousMove).map((k) => {
+            if (distance[k] > max) {
+                maxKey = k;
+                max = distance[k];
+            }
+            // max = distance[k] > max ? distance[k] : max;
+        });
+
+        return maxKey;
+    };
     
     Field.prototype.getCurrentPosition = function (botId) {
         for (let y = 0; y < this.height; y++) {
@@ -82,10 +98,10 @@
 
     Field.prototype.getDistance = function (botId, enemyBotId) {
         return {
-            east:  this.getEastDistance(botId, enemyBotId),
-            west:  this.getWestDistance(botId, enemyBotId),
-            south: this.getSouthDistance(botId, enemyBotId),
-            north: this.getNorthDistance(botId, enemyBotId)
+            right:  this.getEastDistance(botId, enemyBotId),
+            left:  this.getWestDistance(botId, enemyBotId),
+            down: this.getSouthDistance(botId, enemyBotId),
+            up: this.getNorthDistance(botId, enemyBotId)
         }
     };
 

@@ -94,19 +94,22 @@ Bot.prototype.action = function (data) {
     let botId = this.getBotId();
     let enemyBotId = this.getEnemyBotId();
 
-    console.error('east : ' + this.field.getDistance(botId, enemyBotId).east);
-    console.error('west : ' + this.field.getDistance(botId, enemyBotId).west);
-    console.error('south : ' + this.field.getDistance(botId, enemyBotId).south);
-    console.error('north : ' + this.field.getDistance(botId, enemyBotId).north);
+    console.error('east : ' + this.field.getDistance(botId, enemyBotId).right);
+    console.error('west : ' + this.field.getDistance(botId, enemyBotId).left);
+    console.error('south : ' + this.field.getDistance(botId, enemyBotId).bottom);
+    console.error('north : ' + this.field.getDistance(botId, enemyBotId).top);
 
-    console.error('currentPos X : ' + this.field.getCurrentPosition(botId).x);
-    console.error('currentPos Y : ' + this.field.getCurrentPosition(botId).y);
-    console.error('Enemy currentPos X : ' + this.field.getCurrentPosition(botId).x);
-    console.error('Enemy currentPos Y : ' + this.field.getCurrentPosition(botId).y);
+    // console.error('currentPos X : ' + this.field.getCurrentPosition(botId).x);
+    // console.error('currentPos Y : ' + this.field.getCurrentPosition(botId).y);
+    // console.error('Enemy currentPos X : ' + this.field.getCurrentPosition(botId).x);
+    // console.error('Enemy currentPos Y : ' + this.field.getCurrentPosition(botId).y);
 
     if (data[0] === 'move') {
-        const moves = this.field.getAvailableMoves(this.previousMove);
-        const move = moves[Math.floor(Math.random() * moves.length)];
+        // const moves = this.field.getAvailableMoves(this.previousMove);
+        // const move = moves[Math.floor(Math.random() * moves.length)];
+
+        const move = this.field.defineDirection(botId, enemyBotId, this.previousMove);
+        console.error(move);
 
         this.previousMove = move;
 
