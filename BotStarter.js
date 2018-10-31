@@ -90,9 +90,20 @@ Bot.prototype.settings = function (data) {
 };
 
 Bot.prototype.action = function (data) {
-    // console.error(this);
-    console.error(this.field.getCurrentPosition(this.getBotId()));
-    // console.error(this.field.grid);
+
+    let botId = this.getBotId();
+    let enemyBotId = this.getEnemyBotId();
+
+    console.error('east : ' + this.field.getDistance(botId, enemyBotId).east);
+    console.error('west : ' + this.field.getDistance(botId, enemyBotId).west);
+    console.error('south : ' + this.field.getDistance(botId, enemyBotId).south);
+    console.error('north : ' + this.field.getDistance(botId, enemyBotId).north);
+
+    console.error('currentPos X : ' + this.field.getCurrentPosition(botId).x);
+    console.error('currentPos Y : ' + this.field.getCurrentPosition(botId).y);
+    console.error('Enemy currentPos X : ' + this.field.getCurrentPosition(botId).x);
+    console.error('Enemy currentPos Y : ' + this.field.getCurrentPosition(botId).y);
+
     if (data[0] === 'move') {
         const moves = this.field.getAvailableMoves(this.previousMove);
         const move = moves[Math.floor(Math.random() * moves.length)];
@@ -119,6 +130,10 @@ Bot.prototype.update = function (data) {
 Bot.prototype.getBotId = function () {
     return this.options.your_botid;
 };
+
+Bot.prototype.getEnemyBotId = function () {
+    return 1 - this.getBotId()
+}
 
 String.prototype.toCamelCase = function () {
     return this.replace('/', '_').replace(/_[a-z]/g, function (match) {

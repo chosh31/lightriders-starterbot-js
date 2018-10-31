@@ -79,6 +79,71 @@
             }
         }
     };
+
+    Field.prototype.getDistance = function (botId, enemyBotId) {
+        return {
+            east:  this.getEastDistance(botId, enemyBotId),
+            west:  this.getWestDistance(botId, enemyBotId),
+            south: this.getSouthDistance(botId, enemyBotId),
+            north: this.getNorthDistance(botId, enemyBotId)
+        }
+    };
+
+    Field.prototype.getEastDistance = function (botId, enemyBotId) {
+        let currentPos = this.getCurrentPosition(botId);
+        let distance = 0
+
+        for (let x = currentPos.x; x < this.width - 1; x++) {
+            let gridValue = this.grid[x][currentPos.y];
+            if (gridValue !== enemyBotId || gridValue !== 'x') {
+                distance++;
+            }
+        }
+
+        return distance
+    };
+
+    Field.prototype.getWestDistance = function (botId, enemyBotId) {
+        let currentPos = this.getCurrentPosition(botId);
+        let distance = 0
+
+        for (let x = currentPos.x; x > 0; x--) {
+            let gridValue = this.grid[x][currentPos.y];
+            if (gridValue !== enemyBotId || gridValue !== 'x') {
+                distance++;
+            }
+        }
+
+        return distance
+    };
+
+    Field.prototype.getSouthDistance = function (botId, enemyBotId) {
+        let currentPos = this.getCurrentPosition(botId);
+        let distance = 0
+
+        for (let y = currentPos.y; y < this.height; y++) {
+            let gridValue = this.grid[currentPos.x][y];
+            if (gridValue !== enemyBotId || gridValue !== 'x') {
+                distance++;
+            }
+        }
+
+        return distance
+    };
+
+    Field.prototype.getNorthDistance = function (botId, enemyBotId) {
+        let currentPos = this.getCurrentPosition(botId);
+        let distance = 0
+
+        for (let y = currentPos.y; y > 0; y--) {
+            let gridValue = this.grid[currentPos.x][y];
+            if (gridValue !== enemyBotId || gridValue !== 'x') {
+                distance++;
+            }
+        }
+
+        return distance
+    };
     
     module.exports = Field;
 
