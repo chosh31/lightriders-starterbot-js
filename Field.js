@@ -109,7 +109,7 @@
         let currentPos = this.getCurrentPosition(botId);
         let distance = 0
 
-        for (let x = currentPos.x; x < this.width - 1; x++) {
+        for (let x = currentPos.x + 1; x < this.width; x++) {
             let gridValue = this.grid[x][currentPos.y];
             
             if (gridValue === enemyBotId || gridValue === 'x') {
@@ -126,7 +126,7 @@
         let currentPos = this.getCurrentPosition(botId);
         let distance = 0
 
-        for (let x = currentPos.x; x > 0; x--) {
+        for (let x = currentPos.x - 1; x > 0; x--) {
             let gridValue = this.grid[x][currentPos.y];
             if (gridValue === enemyBotId || gridValue === 'x') {
                 break;
@@ -143,7 +143,7 @@
         let currentPos = this.getCurrentPosition(botId);
         let distance = 0
 
-        for (let y = currentPos.y; y < this.height; y++) {
+        for (let y = currentPos.y + 1; y < this.height; y++) {
             let gridValue = this.grid[currentPos.x][y];
             if (gridValue === enemyBotId || gridValue === 'x') {
                 break;
@@ -159,7 +159,7 @@
         let currentPos = this.getCurrentPosition(botId);
         let distance = 0
 
-        for (let y = currentPos.y; y > 0; y--) {
+        for (let y = currentPos.y - 1; y > 0; y--) {
             let gridValue = this.grid[currentPos.x][y];
             if (gridValue === enemyBotId || gridValue === 'x') {
                 break;
