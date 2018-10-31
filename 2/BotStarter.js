@@ -95,11 +95,12 @@ Bot.prototype.action = function (data) {
     let botId = this.getBotId();
     let enemyBotId = this.getEnemyBotId();
     let initDirection = botId === 0 ? 'right' : 'left';
+    let currentPos = this.field.getCurrentPosition(botId);
 
-    console.error('right : ' + this.field.getDistance(botId, enemyBotId).right);
-    console.error('left : ' + this.field.getDistance(botId, enemyBotId).left);
-    console.error('down : ' + this.field.getDistance(botId, enemyBotId).down);
-    console.error('up : ' + this.field.getDistance(botId, enemyBotId).up);
+    console.error('right : ' + this.field.getDistance(currentPos, enemyBotId).right);
+    console.error('left : ' + this.field.getDistance(currentPos, enemyBotId).left);
+    console.error('down : ' + this.field.getDistance(currentPos, enemyBotId).down);
+    console.error('up : ' + this.field.getDistance(currentPos, enemyBotId).up);
 
     // console.error('currentPos X : ' + this.field.getCurrentPosition(botId).x);
     // console.error('currentPos Y : ' + this.field.getCurrentPosition(botId).y);
@@ -110,14 +111,14 @@ Bot.prototype.action = function (data) {
         // const moves = this.field.getAvailableMoves(this.previousMove);
         // const move = moves[Math.floor(Math.random() * moves.length)];
 
-        if (this.once && this.field.getDistance(botId, enemyBotId)[initDirection]) {
-            if (this.field.getDistance(botId, enemyBotId)[initDirection] == 0) {
+        if (this.once && this.field.getDistance(currentPos, enemyBotId)[initDirection]) {
+            if (this.field.getDistance(currentPos, enemyBotId)[initDirection] == 0) {
                 this.once = false;
             }
             return initDirection;
         }
 
-        const move = this.field.defineDirection(botId, enemyBotId, this.previousMove);
+        const move = this.field.defineDirection(currentPos, enemyBotId, this.previousMove);
         console.error(move);
 
         this.previousMove = move;
